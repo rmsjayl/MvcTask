@@ -1,0 +1,246 @@
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/index.js"></script>
+
+
+@model IEnumerable<WebApplication1.Models.UserInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h4 class="app-header"> Employee Details </h4>
+
+<p>
+    <button class="btn btn-primary" onclick="showModal()">
+        CREATE USER
+    </button>
+
+    <button class="btn btn-warning" onclick="transferUserRecord()">
+        TRANSFER RECORD
+    </button>
+</p>
+
+<div class="calculate-total__section">
+    <div class="total-data">
+        <small> TOTAL USER: </small>
+        <span class="total-data__accumalated" id="total-user__acumulated"> 0 </span>
+    </div>
+
+    <div class="total-data">
+        <small> TOTAL SALARY: </small>
+        <span class="total-data__accumalated" id="total-salary__acumulated"> 0 </span>
+    </div>
+</div>
+
+
+
+@*FOR CREATE USER MODAL TALBE ONE*@
+<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CREATE USER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="recordTableOne">
+                    <div class="form-group">
+                        <div class="user-name__input">
+                            <label for="recipient-name" class="col-form-label">First Name:</label>
+                            <input type="text" class="form-control" id="recipient-firstName">
+                        </div>
+                        <div class="user-name__input">
+                            <label for="recipient-name" class="col-form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="recipient-lastName">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="recipient-name" class="col-form-label">Age</label>
+                            <input type="text" class="form-control" id="recipient-age">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="recipient-name" class="col-form-label">Salary</label>
+                            <input type="text" class="form-control" id="recipient-salary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="createRecord()">Create User</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*FOR EDIT USER MODAL TABLE ONE*@
+<div class="modal fade" id="editUserModalTab1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">EDIT USER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="user-name__input">
+                            <input type="text" hidden id="editTab1-recipient-id" />
+                            <label for="recipient-name" class="col-form-label">First Name:</label>
+                            <input type="text" class="form-control" id="editTab1-recipient-firstName">
+                        </div>
+                        <div class="user-name__input">
+                            <label for="recipient-name" class="col-form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="editTab1-recipient-lastName">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="recipient-name" class="col-form-label">Age</label>
+                            <input type="text" class="form-control" id="editTab1-recipient-age">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="recipient-name" class="col-form-label">Salary</label>
+                            <input type="text" class="form-control" id="editTab1-recipient-salary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateUserRecordTableOne()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*FOR EDIT USER MODAL TABLE TWO*@
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">EDIT USER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <div class="user-name__input">
+                            <input type="text" hidden id="edit-recipient-id" />
+                            <label for="recipient-name" class="col-form-label">First Name:</label>
+                            <input type="text" class="form-control" id="edit-recipient-firstName">
+                        </div>
+                        <div class="user-name__input">
+                            <label for="recipient-name" class="col-form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="edit-recipient-lastName">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="recipient-name" class="col-form-label">Age</label>
+                            <input type="text" class="form-control" id="edit-recipient-age">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="recipient-name" class="col-form-label">Salary</label>
+                            <input type="text" class="form-control" id="edit-recipient-salary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updateUserRecord()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            Salary
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    <tbody id="record-table">
+    </tbody>
+
+</table>
+
+<div class="table-retrieved__data">
+    <h5 class="app-header"> Record Two </h5>
+
+    <div class="calculate-total__section">
+        <div class="total-data">
+            <small> TOTAL USER: </small>
+            <span class="total-data__accumalated" id="recordTwo-user__acumulated"> 0 </span>
+        </div>
+
+        <div class="total-data">
+            <small> TOTAL SALARY: </small>
+            <span class="total-data__accumalated" id="recordTwo-salary__acumulated"> 0 </span>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        <tbody id="recordTwo-table">
+        </tbody>
+    </table>
+</div>

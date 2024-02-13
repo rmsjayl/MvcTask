@@ -1,0 +1,55 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    user-select: none;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.app-header {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.form-group {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+}
+
+
+.table-retrieved__data {
+    margin-top: 10rem;
+}
+
+.calculate-total__section {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0rem;
+}
+
+small {
+    padding: 8px 0;
+}
+
+.total-data__accumalated {
+    font-weight: 700;
+}
